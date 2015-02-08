@@ -43,7 +43,7 @@ object ApplicationBuild extends Build with UniversalKeys {
       EclipseKeys.skipParents in ThisBuild := false
     ) ++ (
       // ask scalajs project to put its outputs in scalajsOutputDir
-      Seq(packageScalaJSLauncher, fastOptJS, fullOptJS) map { packageJSKey =>
+      Seq(packageJSDependencies, packageScalaJSLauncher, fastOptJS, fullOptJS) map { packageJSKey =>
         crossTarget in (scalajs, Compile, packageJSKey) := scalajsOutputDir.value
       }
     ) ++ sharedDirectorySettings
@@ -56,7 +56,8 @@ object ApplicationBuild extends Build with UniversalKeys {
       persistLauncher := true,
       persistLauncher in Test := false,
       relativeSourceMaps := true,
-      libraryDependencies ++= Dependencies.scalajs.value
+      libraryDependencies ++= Dependencies.scalajs.value,
+      skip in packageJSDependencies := false
     ) ++ sharedDirectorySettings
 
   lazy val sharedScalaSettings =
@@ -85,19 +86,19 @@ object Dependencies {
   val shared = Def.setting(Seq())
 
   val scalajvm = Def.setting(shared.value ++ Seq(
-    "com.vmunier" %% "play-scalajs-sourcemaps" % Versions.playScalajsSourcemaps,
-    "org.webjars" % "jquery" % Versions.jquery
+    "com.vmunier" %% "play-scalajs-sourcemaps" % Versions.playScalajsSourcemaps
   ))
 
   val scalajs = Def.setting(shared.value ++ Seq(
-    "org.scala-js" %%% "scalajs-dom" % Versions.scalajsDom
+    "com.xored.scalajs" %%% "scalajs-react" % Versions.scalajsReact,
+    compilerPlugin("org.scalamacros" % "paradise" % Versions.macroParadise cross CrossVersion.full)
   ))
 }
 
 object Versions {
   val app = "0.1.0-SNAPSHOT"
   val scala = "2.11.5"
-  val scalajsDom = "0.8.0"
-  val jquery = "1.11.1"
+  val scalajsReact = "0.3.3"
+  val macroParadise = "2.0.1"
   val playScalajsSourcemaps = "0.1.0"
 }

@@ -1,8 +1,8 @@
-# Play Framework with Scala.js
+# Play Framework with scala-js-react
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vmunier/play-with-scalajs-example?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+This project provides a starting point for your [scala-js-react](https://github.com/xored/scala-js-react) application.
 
-This is a simple example application showing how you can integrate a Play project with a Scala.js project.
+Project is based on [play-with-scalajs-example](https://github.com/vmunier/play-with-scalajs-example) which is a simple example application showing how you can integrate a Play project with a Scala.js project.
 
 The application contains three directories:
 * `scalajvm` Play application (server side)
