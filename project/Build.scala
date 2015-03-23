@@ -15,20 +15,24 @@ object ApplicationBuild extends Build with UniversalKeys {
 
   override def rootProject = Some(scalajvm)
 
+  lazy val commonSettings = Seq(
+    resolvers += "scalajs-react bintray" at "http://dl.bintray.com/kanterov/maven"
+  )
+
   lazy val scalajvm = Project(
     id = "scalajvm",
     base = file("scalajvm")
-  ) enablePlugins (PlayScala) settings (scalajvmSettings: _*) aggregate (scalajs)
+  ) enablePlugins (PlayScala) settings (scalajvmSettings: _*) settings (commonSettings: _*) aggregate (scalajs)
 
   lazy val scalajs = Project(
     id = "scalajs",
     base = file("scalajs")
-  ) enablePlugins(ScalaJSPlugin) settings (scalajsSettings: _*)
+  ) enablePlugins(ScalaJSPlugin) settings (scalajsSettings: _*) settings (commonSettings: _*)
 
   lazy val sharedScala = Project(
     id = "sharedScala",
     base = file(SharedSrcDir)
-  ) settings (sharedScalaSettings: _*)
+  ) settings (sharedScalaSettings: _*) settings (scalajsSettings: _*)
 
   lazy val scalajvmSettings =
     Seq(
@@ -90,15 +94,15 @@ object Dependencies {
   ))
 
   val scalajs = Def.setting(shared.value ++ Seq(
-    "com.xored.scalajs" %%% "scalajs-react" % Versions.scalajsReact,
+    "com.kanterov.scalajs" %%% "scalajs-react" % Versions.scalajsReact,
     compilerPlugin("org.scalamacros" % "paradise" % Versions.macroParadise cross CrossVersion.full)
   ))
 }
 
 object Versions {
   val app = "0.1.0-SNAPSHOT"
-  val scala = "2.11.5"
-  val scalajsReact = "0.3.3"
+  val scala = "2.11.6"
+  val scalajsReact = "0.3.4"
   val macroParadise = "2.0.1"
   val playScalajsSourcemaps = "0.1.0"
 }

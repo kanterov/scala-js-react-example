@@ -1,6 +1,6 @@
 package example
 
-import com.xored.scalajs.react.React
+import com.kanterov.scalajs.react.React
 
 import scala.scalajs.js
 import org.scalajs.dom

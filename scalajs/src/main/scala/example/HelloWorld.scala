@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom._
-import com.xored.scalajs.react._
+import com.kanterov.scalajs.react._
 
 object HelloWorld extends TypedReactSpec {
   case class Props()

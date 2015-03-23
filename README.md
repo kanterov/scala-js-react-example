@@ -1,6 +1,6 @@
 # Play Framework with scala-js-react
 
-This project provides a starting point for your [scala-js-react](https://github.com/xored/scala-js-react) application.
+This project provides a starting point for your [scala-js-react](https://github.com/kanterov/scala-js-react) application.
 
 Project is based on [play-with-scalajs-example](https://github.com/vmunier/play-with-scalajs-example) which is a simple example application showing how you can integrate a Play project with a Scala.js project.
 
